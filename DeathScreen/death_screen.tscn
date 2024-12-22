@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://dia02uy7uyst7"]
+
+[ext_resource type="Script" path="res://DeathScreen/death_screen.gd" id="1_7rdhe"]
+[ext_resource type="FontFile" uid="uid://chbqlynugluyu" path="res://assets/antiquity-print.ttf" id="1_f8fjv"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7rdhe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 248.0
+grow_horizontal = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_f8fjv")
+bbcode_enabled = true
+text = "[center][font_size=100][color=red] GAME OVER [/color][/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = -24.0
+offset_right = 151.5
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+keep_pressed_outside = true
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = 126.0
+offset_right = 151.5
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+keep_pressed_outside = true
+text = "Main Menu"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

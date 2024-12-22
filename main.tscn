@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://vfkc7kby0mg8"]
+[gd_scene load_steps=6 format=3 uid="uid://vfkc7kby0mg8"]
 
 [ext_resource type="PackedScene" uid="uid://bk1cvfwvigx5u" path="res://Player/player.tscn" id="1_fnsev"]
 [ext_resource type="Script" path="res://main.gd" id="1_jerfa"]
 [ext_resource type="PackedScene" uid="uid://dx6majfjc6oh7" path="res://Map/map.tscn" id="2_tm7wf"]
 [ext_resource type="Script" path="res://camera.gd" id="3_jkvbu"]
+[ext_resource type="PackedScene" uid="uid://dia02uy7uyst7" path="res://DeathScreen/death_screen.tscn" id="5_xpf8i"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_jerfa")
@@ -16,3 +17,6 @@ metadata/spawn = Vector2(576, 324)
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("3_jkvbu")
+
+[node name="DeathScreen" parent="." instance=ExtResource("5_xpf8i")]
+visible = false
