@@ -22,7 +22,7 @@ var is_dead = false
 
 var death_pos: Vector2
 
-signal player_exited_screen
+signal player_died
 
 func switch_hitbox(to_up: bool):
 	var is_switching = true
@@ -37,12 +37,10 @@ func switch_hitbox(to_up: bool):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parent = get_parent()
-	hitbox_up = $CollisionShape2D_up
-	hitbox_down = $CollisionShape2D_down
+	hitbox_up = $Hitbox_up
+	hitbox_down = $Hitbox_down
 	slide_cooldown = $slide_cooldown
 	speed = run_speed
-	position = parent.get_meta("spawn")
-	position.y -= 100
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -50,7 +48,13 @@ func _physics_process(delta):
 		velocity = Vector2(0,parent.get_meta('gravity',0))
 		move_and_slide()
 		return
-		
+	
+	# mort à l'interieur de l'ecran
+	if get_last_slide_collision() and get_last_slide_collision().get_collider().name == "MapObstacles":
+		if not is_on_ceiling():
+			is_dead = true
+			emit_signal("player_died")
+			return
 		
 	# gestion de la hauteur (gravité, saut)
 	if not is_on_floor():
@@ -115,9 +119,9 @@ func _physics_process(delta):
 		
 	move_and_slide()
 
-
+# mort des bordures
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	emit_signal("player_exited_screen")
+	emit_signal("player_died")
 	is_dead = true
 
 

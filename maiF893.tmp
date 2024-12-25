@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vfkc7kby0mg8"]
+[gd_scene load_steps=6 format=3 uid="uid://vfkc7kby0mg8"]
 
 [ext_resource type="PackedScene" uid="uid://bk1cvfwvigx5u" path="res://Player/player.tscn" id="1_fnsev"]
 [ext_resource type="Script" path="res://main.gd" id="1_jerfa"]
 [ext_resource type="PackedScene" uid="uid://dx6majfjc6oh7" path="res://Map/map.tscn" id="2_tm7wf"]
 [ext_resource type="Script" path="res://camera.gd" id="3_jkvbu"]
-[ext_resource type="PackedScene" uid="uid://ug1a7cw8fmk6" path="res://PlayerUI/player_ui.tscn" id="3_vkh3g"]
-[ext_resource type="PackedScene" uid="uid://dia02uy7uyst7" path="res://DeathScreen/death_screen.tscn" id="5_xpf8i"]
+[ext_resource type="PackedScene" uid="uid://brfhathy3wtb4" path="res://Interfaces/interfaces.tscn" id="5_xpf8i"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_jerfa")
@@ -14,11 +13,10 @@ metadata/spawn = Vector2(576, 324)
 
 [node name="Player" parent="." instance=ExtResource("1_fnsev")]
 
-[node name="PlayerUI" parent="." instance=ExtResource("3_vkh3g")]
-
 [node name="Map" parent="." instance=ExtResource("2_tm7wf")]
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("3_jkvbu")
 
-[node name="DeathScreen" parent="." instance=ExtResource("5_xpf8i")]
+[node name="Interfaces" parent="." instance=ExtResource("5_xpf8i")]
+visible = false

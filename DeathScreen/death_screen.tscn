@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://chbqlynugluyu" path="res://assets/antiquity-print.ttf" id="1_f8fjv"]
 
 [node name="DeathScreen" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
