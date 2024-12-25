@@ -9,7 +9,6 @@ var deathScreen : Control
 
 func on_player_dead():
 	camera.speed = 0
-	player.die(camera.get_screen_center_position())
 	
 	var top_left = camera.get_screen_center_position() - (camera.get_viewport_rect().size / 2)
 	deathScreen.set_position(top_left)
