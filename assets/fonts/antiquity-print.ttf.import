@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://df1jtvo1jqxn5"
-path="res://.godot/imported/Mork Dungeon.ttf-c86ee10cacd1987a4b7b8a1a0a81f67d.fontdata"
+uid="uid://chbqlynugluyu"
+path="res://.godot/imported/antiquity-print.ttf-929e51cd2ba6ff1c92486a6cad582189.fontdata"
 
 [deps]
 
-source_file="res://assets/Mork Dungeon.ttf"
-dest_files=["res://.godot/imported/Mork Dungeon.ttf-c86ee10cacd1987a4b7b8a1a0a81f67d.fontdata"]
+source_file="res://assets/fonts/antiquity-print.ttf"
+dest_files=["res://.godot/imported/antiquity-print.ttf-929e51cd2ba6ff1c92486a6cad582189.fontdata"]
 
 [params]
 

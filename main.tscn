@@ -22,3 +22,4 @@ metadata/spawn = Vector2(576, 324)
 script = ExtResource("3_jkvbu")
 
 [node name="DeathScreen" parent="." instance=ExtResource("5_xpf8i")]
+visible = false

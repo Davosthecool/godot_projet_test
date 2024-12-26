@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dia02uy7uyst7"]
 
 [ext_resource type="Script" path="res://DeathScreen/death_screen.gd" id="1_7rdhe"]
-[ext_resource type="FontFile" uid="uid://chbqlynugluyu" path="res://assets/antiquity-print.ttf" id="1_f8fjv"]
+[ext_resource type="FontFile" uid="uid://chbqlynugluyu" path="res://assets/fonts/antiquity-print.ttf" id="1_f8fjv"]
 
 [node name="DeathScreen" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
