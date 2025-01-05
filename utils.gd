@@ -8,3 +8,4 @@ static func get_world_position_from_camera(screen_pos: Vector2, camera: Camera2D
 
 static func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+	
