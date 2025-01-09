@@ -15,6 +15,10 @@ run/main_scene="res://MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
@@ -52,6 +56,7 @@ crouch={
 2d_physics/layer_1="player"
 2d_physics/layer_2="map"
 2d_physics/layer_3="enemies"
+2d_physics/layer_4="end"
 
 [rendering]
 

@@ -1,0 +1,113 @@
+[gd_scene load_steps=3 format=3 uid="uid://brhmcpevt6xr3"]
+
+[ext_resource type="FontFile" uid="uid://chbqlynugluyu" path="res://assets/fonts/antiquity-print.ttf" id="1_f8fjv"]
+
+[sub_resource type="GDScript" id="GDScript_dfy0t"]
+script/source = "extends Control
+
+signal restart_game
+signal back_to_menu
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func setText(text: String):
+	$TitleLabel.text=\"[center][font_size=100][color=red] {} [/color][/font_size][/center]\".format([text],\"{}\")
+
+func setTimer(timer: float):
+	$TimerLabel.text=\"[center][font_size=30] Timer : {} [/font_size][/center]\".format([Utils.round_to_dec(timer,2)],\"{}\")
+
+func _on_restart_button_pressed():
+	emit_signal(\"restart_game\") # Replace with function body.
+
+
+func _on_menu_button_pressed():
+	emit_signal(\"back_to_menu\") # Replace with function body.
+"
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_dfy0t")
+
+[node name="TitleLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 248.0
+grow_horizontal = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_f8fjv")
+bbcode_enabled = true
+text = "[center][font_size=100][color=red] GAME OVER [/color][/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = 28.0
+offset_right = 151.5
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+keep_pressed_outside = true
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = 165.0
+offset_right = 151.5
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+keep_pressed_outside = true
+text = "Main Menu"
+
+[node name="TimerLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -45.0
+offset_right = 20.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

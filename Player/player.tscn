@@ -1,10 +1,13 @@
-[gd_scene load_steps=54 format=3 uid="uid://bk1cvfwvigx5u"]
+[gd_scene load_steps=55 format=3 uid="uid://bk1cvfwvigx5u"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_il3ep"]
 [ext_resource type="Shape2D" uid="uid://dvfgq8q4ciyre" path="res://Player/physics/player_slide_hitbox.tres" id="2_5ifm7"]
 [ext_resource type="Shape2D" uid="uid://cr8co0v508pfj" path="res://Player/physics/player_classic_hitbox.tres" id="2_flcu4"]
 [ext_resource type="Script" path="res://Player/AnimationManager.gd" id="5_rfqiu"]
 [ext_resource type="Texture2D" uid="uid://cvbxsv12md3q5" path="res://Player/assets/KnightPack/Colour2/Outline/120x80_PNGSheets/_All.png" id="13_h4yg5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58b3k"]
+size = Vector2(20, 5)
 
 [sub_resource type="Animation" id="Animation_xokqm"]
 length = 0.001
@@ -191,11 +194,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4mvle"]
 advance_mode = 2
-advance_expression = "on_crouch"
+advance_expression = "state == player_states.CROUCHING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iuy30"]
 advance_mode = 2
-advance_expression = "!on_crouch"
+advance_expression = "state != player_states.CROUCHING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jq4cw"]
 states/crouch_idle/node = SubResource("AnimationNodeAnimation_uq2ve")
@@ -218,27 +221,27 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_on0q5"]
 advance_mode = 2
-advance_expression = "on_slide"
+advance_expression = "state == player_states.SLIDING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c2sxy"]
 advance_mode = 2
-advance_expression = "!on_slide"
+advance_expression = "state != player_states.SLIDING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_43t8w"]
 advance_mode = 2
-advance_expression = "on_crouch"
+advance_expression = "state == player_states.CROUCHING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6q1ye"]
 advance_mode = 2
-advance_expression = "!on_crouch"
+advance_expression = "state != player_statese.DEAD"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10qp7"]
 advance_mode = 2
-advance_expression = "on_slide"
+advance_expression = "state == player_states.SLIDING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6n3y1"]
 advance_mode = 2
-advance_expression = "on_crouch"
+advance_expression = "state == player_states.CROUCHING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_s37f2"]
 states/crouch/node = SubResource("AnimationNodeAnimation_e5jlj")
@@ -315,15 +318,15 @@ advance_expression = "velocity.x and !velocity.y"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p668g"]
 advance_mode = 2
-advance_expression = "is_dead"
+advance_expression = "state == player_states.DEAD"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7e8q"]
 advance_mode = 2
-advance_expression = "is_dead"
+advance_expression = "state == player_states.DEAD"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dftgt"]
 advance_mode = 2
-advance_expression = "is_dead"
+advance_expression = "state == player_states.DEAD"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_20j1d"]
 states/End/position = Vector2(890, 124)
@@ -347,10 +350,6 @@ script = ExtResource("1_il3ep")
 position = Vector2(-5, 20.5)
 shape = ExtResource("2_flcu4")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-5, 20.5)
-scale = Vector2(1.1, 1.95)
-
 [node name="slide_cooldown" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -365,6 +364,12 @@ position = Vector2(-18, 2)
 target_position = Vector2(28, 0)
 collision_mask = 2
 hit_from_inside = true
+
+[node name="EndDetector" type="ShapeCast2D" parent="."]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_58b3k")
+target_position = Vector2(0, 38)
+collision_mask = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_tree", "player")]
 texture = ExtResource("13_h4yg5")
@@ -384,7 +389,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_20j1d")
 advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/MoveY/blend_position = 0.00247729
+parameters/MoveY/blend_position = -0.00247729
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="slide_cooldown" to="." method="_on_slide_cooldown_timeout"]

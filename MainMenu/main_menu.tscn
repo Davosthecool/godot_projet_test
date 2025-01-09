@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://brpivtstcn21p"]
+[gd_scene load_steps=7 format=3 uid="uid://brpivtstcn21p"]
 
 [ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_syd8v"]
 [ext_resource type="Texture2D" uid="uid://bnotaljmpo5h3" path="res://MainMenu/main_menu_background.webp" id="1_tfayj"]
 [ext_resource type="Texture2D" uid="uid://bwy0iob3mqjkn" path="res://assets/title/RUN-FASTER-26-12-2024.png" id="3_airm5"]
 [ext_resource type="Script" path="res://MainMenu/settings.gd" id="4_g6sx0"]
 [ext_resource type="Script" path="res://MainMenu/SettingsMenu/controls.gd" id="5_i1q4u"]
+[ext_resource type="Script" path="res://MainMenu/LevelSelector/levels_list.gd" id="6_o0rxo"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -174,6 +175,33 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Back"
+
+[node name="LevelSelectorContainer" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelectorPanel" type="PanelContainer" parent="LevelSelectorContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -135.0
+offset_right = 400.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelsList" type="VBoxContainer" parent="LevelSelectorContainer/LevelSelectorPanel"]
+layout_mode = 2
+script = ExtResource("6_o0rxo")
 
 [connection signal="pressed" from="MainMenuContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MainMenuContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
