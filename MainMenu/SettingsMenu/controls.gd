@@ -66,35 +66,27 @@ func create_bindings_nodes(container: VBoxContainer):
 	container.add_child(separator)
 
 func save_keybindings():
-	var file = FileAccess.open("user://keybindings.cfg", FileAccess.WRITE)
 	var keybindings = {}
-	
 	for data in bindings_datas.values():
 		if data["key"]=="":
 			continue
 		keybindings[data["key"]] = var_to_str(InputMap.action_get_events(data["key"])[0])
 
-	file.store_var(keybindings)
-	file.close()
+	FilesUtils.save_keybindings_file(keybindings)
 
 func load_keybindings():
-	var file = FileAccess.open("user://keybindings.cfg", FileAccess.READ)
-	var keybindings = file.get_var()
+	var keybindings = FilesUtils.load_keybindings_file()
+	if keybindings==null: return
+	
 	for key in keybindings.keys():
 		InputMap.action_erase_events(key)
 		InputMap.action_add_event(key,str_to_var(keybindings[key]))
-	file.close()
-
-
-
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_keybindings()
 	create_bindings_nodes($ControlsContainer/ControlsList)
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

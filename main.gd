@@ -14,24 +14,22 @@ var elapsed_time : float
 func on_player_start():
 	camera.speed = camera.move_speed
 	is_player_started = true
+
+func finish_game(text: String):
+	is_player_ended = true
+	camera.speed = 0
+	player_ui.hide()
+	endScreen.setText(text)
+	endScreen.setTimer(elapsed_time)
+	endScreen.set_position(Utils.get_world_position_from_camera(Vector2(0,0),camera))
+	endScreen.show()
 	
 func on_player_dead():
-	is_player_ended = true
-	camera.speed = 0
-	player_ui.hide()
-	endScreen.setText("GAME OVER")
-	endScreen.setTimer(elapsed_time)
-	endScreen.set_position(Utils.get_world_position_from_camera(Vector2(0,0),camera))
-	endScreen.show()
-
+	finish_game("GAME OVER")
 func on_player_ended():
-	is_player_ended = true
-	camera.speed = 0
-	player_ui.hide()
-	endScreen.setText("YOU WIN")
-	endScreen.setTimer(elapsed_time)
-	endScreen.set_position(Utils.get_world_position_from_camera(Vector2(0,0),camera))
-	endScreen.show()
+	FilesUtils.save_best_timer(Utils.round_to_dec(elapsed_time,2),Global.current_map)
+	finish_game("YOU WIN")
+	
 
 func restart_game():
 	get_tree().reload_current_scene()

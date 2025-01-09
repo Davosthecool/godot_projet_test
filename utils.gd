@@ -42,23 +42,3 @@ static func is_colliding_with_layer(player: CharacterBody2D, layer_name: String)
 		else:
 			return get_physics_layers().get(layer_name,null) == layer
 	return false
-
-static func dir_contents(path):
-	var scene_loads = {}	
-
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-			else:
-				if file_name.get_extension() == "tscn":
-					var full_path = path.path_join(file_name)
-					scene_loads[file_name.get_basename()] = load(full_path)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-
-	return scene_loads

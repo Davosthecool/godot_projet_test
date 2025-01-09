@@ -27,3 +27,8 @@ func _on_settings_button_pressed():
 func _on_settings_back_button_pressed():
 	$MainMenuContainer.show()
 	$SettingsContainer.hide()
+
+
+func _on_level_selector_back_button_pressed():
+	$MainMenuContainer.show()
+	$LevelSelectorContainer.hide()
