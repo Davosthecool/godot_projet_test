@@ -63,7 +63,7 @@ func create_bindings_nodes(container: VBoxContainer):
 		
 		container.add_child(action_container)
 		
-	container.add_child(separator)
+	container.add_child(separator.duplicate())
 
 func save_keybindings():
 	var keybindings = {}

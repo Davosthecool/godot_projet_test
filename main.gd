@@ -73,6 +73,6 @@ func _process(delta):
 	
 	var screen_size = camera.get_viewport_rect().size
 	if player.position.x > camera.position.x:
-		camera.speed = lerp(camera.speed,player.speed,delta)
+		camera.speed = lerp(camera.speed,player.speed*1.3,delta)
 	else:
 		camera.speed = lerp(camera.speed,camera.move_speed,delta)

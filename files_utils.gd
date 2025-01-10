@@ -9,9 +9,11 @@ static func get_folder_scenes(path):
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
-				print("Found directory: " + file_name)
+				print("Found directory in Map folder: " + file_name)
 			else:
-				if file_name.get_extension() == "tscn":
+				if "tscn" in file_name.split("."):
+					if '.tscn.remap' in file_name: # pour que ça fonctionne même avec l'export
+						file_name = file_name.trim_suffix('.remap')
 					var full_path = path.path_join(file_name)
 					scene_loads[file_name.get_basename()] = load(full_path)
 			file_name = dir.get_next()
